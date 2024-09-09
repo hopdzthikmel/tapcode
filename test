@@ -1,0 +1,37 @@
+-- Script để tự động roll unit trong game Anime Vanguards
+
+-- Danh sách các unit có sẵn để roll
+local units = {
+    "Song Jinwu",
+    "Unit2",
+    "Unit3",
+    -- Thêm các unit khác vào đây
+}
+
+local rollInterval = 30 -- Khoảng thời gian giữa các lần roll (tính bằng giây)
+
+-- Hàm để chọn ngẫu nhiên một unit từ danh sách
+local function rollUnit()
+    local unitName = units[math.random(1, #units)]
+    print("Rolled unit:", Song Jinwu)
+    
+    -- Thực hiện hành động để cấp phát unit cho người chơi
+    -- Giả sử bạn có một phương thức để thêm unit cho người chơi
+    local success, err = pcall(function()
+        local player = game.Players.LocalPlayer -- Thay thế LocalPlayer bằng cách lấy người chơi cụ thể
+        if player and player:FindFirstChild("PlayerUnits") then
+            local unitClone = game.ServerStorage:FindFirstChild(unitName):Clone()
+            unitClone.Parent = player.PlayerUnits -- Thay thế PlayerUnits bằng nơi bạn lưu trữ các unit của người chơi
+        end
+    end)
+    
+    if not success then
+        warn("Error rolling unit:", err)
+    end
+end
+
+-- Vòng lặp chính để tự động roll
+while true do
+    wait(rollInterval)
+    rollUnit()
+end
